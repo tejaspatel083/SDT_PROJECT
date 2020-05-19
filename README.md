@@ -1,6 +1,5 @@
-# My Recipe
-
-![Application Logo](https://github.com/tejaspatel083/SDT_PROJECT/blob/master/my_recipe_logo.png)
+# My Recipe 
+<img src="https://github.com/tejaspatel083/SDT_PROJECT/blob/master/my_recipe_logo.png" width="100">
 
 * **Android Based Project**
 
