@@ -1,6 +1,6 @@
 # My Recipe
 
-![Test Image 1](logo-dp.jpg)
+![Application Logo](https://github.com/tejaspatel083/SDT_PROJECT/blob/master/my_recipe_logo.png)
 
 * **Android Based Project**
 
