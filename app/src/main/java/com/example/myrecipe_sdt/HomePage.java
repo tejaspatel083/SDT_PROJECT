@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,12 +16,32 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.ArrayList;
+
 public class HomePage extends AppCompatActivity {
+    private ListView listView;
+    private ArrayList<RecipeNameList> arrayList;
+    private RecipeListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        listView = findViewById(R.id.homepage_list);
+
+        arrayList = new ArrayList<>();
+        adapter = new RecipeListAdapter(arrayList);
+
+        arrayList.add(new RecipeNameList("Paneer Butter Masala"));
+        arrayList.add(new RecipeNameList("Palak Paneer"));
+        arrayList.add(new RecipeNameList("Pav Bhaji"));
+        arrayList.add(new RecipeNameList("Pani Puri"));
+        arrayList.add(new RecipeNameList("Sandwich"));
+
+        listView.setAdapter(adapter);
+
+
 
     }
 
