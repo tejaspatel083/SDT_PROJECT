@@ -1,27 +1,20 @@
 package com.example.myrecipe_sdt;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-public class HomePage extends AppCompatActivity {
+public class ProfilePage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
-
+        setContentView(R.layout.activity_profile_page);
     }
 
 
@@ -42,13 +35,14 @@ public class HomePage extends AppCompatActivity {
         switch (id)
         {
             case    R.id.navigation_home:
+
+                Intent intent = new Intent(this,HomePage.class);
+                startActivity(intent);
                 Toast.makeText(this, "Home Page", Toast.LENGTH_SHORT).show();
                 break;
 
             case    R.id.navigation_MyProfile:
 
-                Intent intent = new Intent(this,ProfilePage.class);
-                startActivity(intent);
                 Toast.makeText(this, "My Profile", Toast.LENGTH_SHORT).show();
                 break;
 

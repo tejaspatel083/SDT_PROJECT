@@ -4,7 +4,7 @@
     <string name="pwd">
         <u>Forgot Password?</u>
     </string>
-    <string name="title_activity_home_page">HomePage</string>
+    <string name="title_activity_home_page">Home</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Profile</string>
     <string name="title_notifications">My Recipe List</string>
