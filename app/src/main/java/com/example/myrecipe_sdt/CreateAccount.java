@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
 
 public class CreateAccount extends AppCompatActivity {
 
@@ -67,13 +68,7 @@ public class CreateAccount extends AppCompatActivity {
 
                             if (task.isSuccessful())
                             {
-                                Toast toast = Toast.makeText(CreateAccount.this,"Account Created",Toast.LENGTH_LONG);
-                                toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
-                                toast.show();
-
-                                Intent intent = new Intent(CreateAccount.this,MainActivity.class);
-                                startActivity(intent);
-
+                                sendEmailVerification();
 
                             }else
                             {
@@ -101,5 +96,37 @@ public class CreateAccount extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    private  void sendEmailVerification()
+    {
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+        if (firebaseUser != null)
+        {
+            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                    if (task.isSuccessful())
+                    {
+                        Toast toast = Toast.makeText(CreateAccount.this,"Registration Completed.\nVerify Email",Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                        toast.show();
+                        startActivity(new Intent(CreateAccount.this,MainActivity.class));
+                    }
+                    else
+                    {
+                        Toast toast = Toast.makeText(CreateAccount.this,"Verification mail has not been sent",Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                        toast.show();
+                    }
+                }
+            });
+        }
+
+
+
     }
 }
