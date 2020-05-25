@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".AddRecipe">
+
+    <ImageView
+        android:id="@+id/Add_MyRecipeImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/ic_add_a_photo_black_24dp"
+        tools:ignore="VectorDrawableCompat"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="180dp"
+        android:hint="Click to add image"/>
+
+    <EditText
+        android:id="@+id/Add_MyRecipeName"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="230dp"
+        android:hint="  Recipe Name*"
+        android:background="@drawable/text_background"
+        android:drawableLeft="@drawable/ic_restaurant_black_24dp"
+        android:paddingLeft="10dp"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/Add_CookName"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="290dp"
+        android:hint="  Cook Name*"
+        android:background="@drawable/text_background"
+        android:drawableLeft="@drawable/ic_person_black_24dp"
+        android:paddingLeft="10dp"
+        android:inputType="textPersonName"/>
+    <EditText
+        android:id="@+id/Add_RecipeSteps"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:hint="  Recipe*"
+        android:clickable="false"
+        android:focusable="false"
+        android:scrollbars="vertical"
+        android:lines="1000"
+        android:minLines="1"
+        android:gravity="top|left"
+        android:maxLines="1000"
+        android:background="@drawable/text_background"
+        android:drawableLeft="@drawable/ic_room_service_black_24dp"
+        android:paddingLeft="10dp"
+        android:inputType="textMultiLine"/>
+    <EditText
+        android:id="@+id/Add_EstimatedTime"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="410dp"
+        android:hint="  Estimated Time*"
+        android:background="@drawable/text_background"
+        android:drawableLeft="@drawable/ic_access_time_black_24dp"
+        android:paddingLeft="10dp"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/Add_EstimatedCost"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="470dp"
+        android:hint="  Estimated Cost*"
+        android:background="@drawable/text_background"
+        android:drawableLeft="@drawable/ic_attach_money_black_24dp"
+        android:paddingLeft="10dp"
+        android:inputType="text"/>
+    <Button
+        android:id="@+id/Add_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="540dp"
+        android:background="@drawable/button_background" />
+
+
+</RelativeLayout>

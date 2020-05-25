@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ public class MyRecipeListPage extends AppCompatActivity {
     private ListView mylistview;
     private ArrayList<MyNamelist> mynamelist;
     private MyListAdapter myListAdapter;
+    private Button addbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,7 @@ public class MyRecipeListPage extends AppCompatActivity {
 
 
         mylistview = findViewById(R.id.myrecipepage_list);
+        addbutton = findViewById(R.id.addrecipebtn);
 
         mynamelist = new ArrayList<>();
         myListAdapter = new MyListAdapter(mynamelist);
@@ -37,6 +41,17 @@ public class MyRecipeListPage extends AppCompatActivity {
         mynamelist.add(new MyNamelist("Potato Wages"));
         mynamelist.add(new MyNamelist("Vadapav"));
         mynamelist.add(new MyNamelist("Dal Dhokli"));
+
+
+
+        addbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MyRecipeListPage.this,AddRecipe.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
