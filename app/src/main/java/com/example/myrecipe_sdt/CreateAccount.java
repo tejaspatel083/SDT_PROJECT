@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,12 +15,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 public class CreateAccount extends AppCompatActivity {
 
     private EditText user_name,user_email,user_age,user_phone,user_pwd1,user_pwd2;
     private Button createbtn;
-    //private FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
     private String name,email,phone,age,password,repassword;
 
     @Override
@@ -34,7 +36,8 @@ public class CreateAccount extends AppCompatActivity {
         user_pwd1 = findViewById(R.id.CreatePassword);
         user_pwd2 = findViewById(R.id.CreateRePassword);
         createbtn = findViewById(R.id.CreateBtn);
-        //firebaseAuth = FirebaseAuth.getInstance();
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
 
         createbtn.setOnClickListener(new View.OnClickListener() {
@@ -51,15 +54,50 @@ public class CreateAccount extends AppCompatActivity {
 
                 if (name.length()==0 || email.length()==0 || age.length()==0 || phone.length()==0 || password.length()==0 || repassword.length()==0)
                 {
-                    Toast.makeText(CreateAccount.this, "Enter All Details", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(CreateAccount.this,"Enter All Details",Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                    toast.show();
                 }
                 else if (password.equals(repassword))
                 {
-                    Toast.makeText(CreateAccount.this, "Account Created", Toast.LENGTH_SHORT).show();
+
+                    firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            if (task.isSuccessful())
+                            {
+                                Toast toast = Toast.makeText(CreateAccount.this,"Account Created",Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                                toast.show();
+
+                                Intent intent = new Intent(CreateAccount.this,MainActivity.class);
+                                startActivity(intent);
+
+
+                            }else
+                            {
+                                if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+
+                                    Toast toast = Toast.makeText(CreateAccount.this,"User with this email already exist.",Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                                    toast.show();
+                                }
+                                else
+                                {
+                                    Toast toast = Toast.makeText(CreateAccount.this,"Enter Strong Password\n[ Including Text and Number ]",Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                                    toast.show();
+                                }
+                            }
+                        }
+                    });
                 }
                 else
                 {
-                    Toast.makeText(CreateAccount.this, "Password Mismatched", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(CreateAccount.this,"Password not matched",Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                    toast.show();
                 }
             }
         });
