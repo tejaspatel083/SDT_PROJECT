@@ -17,13 +17,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateAccount extends AppCompatActivity {
 
     private EditText user_name,user_email,user_age,user_phone,user_pwd1,user_pwd2;
     private Button createbtn;
     private FirebaseAuth firebaseAuth;
-    private String name,email,phone,age,password,repassword;
+    String name,email,phone,age,password,repassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,22 +47,23 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                name = user_name.getText().toString().trim();
-                email = user_email.getText().toString().trim();
-                age = user_age.getText().toString().trim();
-                phone = user_phone.getText().toString().trim();
-                password = user_pwd1.getText().toString().trim();
-                repassword = user_pwd2.getText().toString().trim();
 
 
-                if (name.length()==0 || email.length()==0 || age.length()==0 || phone.length()==0 || password.length()==0 || repassword.length()==0)
+
+                if (user_name.getText().toString().trim().length()==0 || user_email.getText().toString().trim().length()==0 || user_age.getText().toString().trim().length()==0 || user_phone.getText().toString().trim().length()==0 || user_pwd1.getText().toString().trim().length()==0 || user_pwd2.getText().toString().trim().length()==0)
                 {
                     Toast toast = Toast.makeText(CreateAccount.this,"Enter All Details",Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
                     toast.show();
                 }
-                else if (password.equals(repassword))
+                else if (user_pwd1.getText().toString().trim().equals(user_pwd2.getText().toString().trim()))
                 {
+                    name = user_name.getText().toString().trim();
+                    email = user_email.getText().toString().trim();
+                    age = user_age.getText().toString().trim();
+                    phone = user_phone.getText().toString().trim();
+                    password = user_pwd1.getText().toString().trim();
+                    repassword = user_pwd2.getText().toString().trim();
 
                     firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -111,6 +114,11 @@ public class CreateAccount extends AppCompatActivity {
 
                     if (task.isSuccessful())
                     {
+
+                        sendUserData();
+                        firebaseAuth.signOut();
+                        finish();
+
                         Toast toast = Toast.makeText(CreateAccount.this,"Registration Completed.\nVerify Email",Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
                         toast.show();
@@ -128,5 +136,13 @@ public class CreateAccount extends AppCompatActivity {
 
 
 
+    }
+
+    private void sendUserData()
+    {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference reference = firebaseDatabase.getReference(firebaseAuth.getUid());
+        UserProfile userProfile = new UserProfile(age,email,name,phone);
+        reference.setValue(userProfile);
     }
 }
