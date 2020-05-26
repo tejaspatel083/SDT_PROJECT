@@ -41,7 +41,14 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        // getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"));
+       FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+       if (firebaseUser != null)
+       {
+           finish();
+           startActivity(new Intent(MainActivity.this,HomePage.class));
+       }
+
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("MissingPermission")
