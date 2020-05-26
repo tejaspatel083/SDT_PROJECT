@@ -10,11 +10,17 @@
 
     <item
         android:id="@+id/navigation_MyProfile"
-        android:title="@string/title_dashboard"/>
+        android:title="@string/title_dashboard"
+        android:icon="@drawable/ic_person_black_24dp"/>
 
     <item
         android:id="@+id/navigation_List"
         android:title="@string/title_notifications"
+        />
+
+    <item
+        android:id="@+id/logout"
+        android:title="Logout"
         />
 
 </menu>

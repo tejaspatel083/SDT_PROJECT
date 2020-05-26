@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 public class MyRecipeListPage extends AppCompatActivity {
@@ -20,6 +22,7 @@ public class MyRecipeListPage extends AppCompatActivity {
     private ArrayList<MyNamelist> mynamelist;
     private MyListAdapter myListAdapter;
     private Button addbutton;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class MyRecipeListPage extends AppCompatActivity {
 
         mylistview = findViewById(R.id.myrecipepage_list);
         addbutton = findViewById(R.id.addrecipebtn);
+        firebaseAuth = FirebaseAuth.getInstance();
 
         mynamelist = new ArrayList<>();
         myListAdapter = new MyListAdapter(mynamelist);
@@ -89,10 +93,20 @@ public class MyRecipeListPage extends AppCompatActivity {
 
                 Toast.makeText(this, "My Recipe List", Toast.LENGTH_SHORT).show();
                 break;
+
+            case R.id.logout:
+
+                firebaseAuth.signOut();
+                finish();
+                startActivity(new Intent(MyRecipeListPage.this,MainActivity.class));
+                Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
+                break;
         }
 
 
 
         return true;
     }
+
+
 }

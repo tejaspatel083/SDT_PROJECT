@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class HomePage extends AppCompatActivity {
     private ListView listView;
     private ArrayList<RecipeNameList> arrayList;
     private RecipeListAdapter adapter;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class HomePage extends AppCompatActivity {
         arrayList.add(new RecipeNameList("Pav Bhaji"));
         arrayList.add(new RecipeNameList("Pani Puri"));
         arrayList.add(new RecipeNameList("Sandwich"));
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         listView.setAdapter(adapter);
 
@@ -90,6 +94,14 @@ public class HomePage extends AppCompatActivity {
                 Intent intent1 = new Intent(this,MyRecipeListPage.class);
                 startActivity(intent1);
                 Toast.makeText(this, "My Recipe List", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.logout:
+
+                firebaseAuth.signOut();
+                finish();
+                startActivity(new Intent(HomePage.this,MainActivity.class));
+                Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
                 break;
         }
 
