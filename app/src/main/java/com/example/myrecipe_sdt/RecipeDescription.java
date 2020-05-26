@@ -18,7 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 public class RecipeDescription extends AppCompatActivity {
 
     private TextView recipename_txt,cookname_txt,time_txt,cost_txt,fullrecipe_txt;
-
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
 
@@ -41,7 +40,9 @@ public class RecipeDescription extends AppCompatActivity {
 
         DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        DatabaseReference recipelistbranch = databaseReference.child("My Recipe List");
+
+        recipelistbranch.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

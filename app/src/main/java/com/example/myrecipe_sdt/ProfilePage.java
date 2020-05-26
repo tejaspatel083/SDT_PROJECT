@@ -107,6 +107,13 @@ public class ProfilePage extends AppCompatActivity {
                 startActivity(new Intent(ProfilePage.this,MainActivity.class));
                 Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
                 break;
+
+            case R.id.detail:
+
+                Intent intent2 = new Intent(this,RecipeDescription.class);
+                startActivity(intent2);
+                Toast.makeText(this, "My Recipe Detail", Toast.LENGTH_SHORT).show();
+                break;
         }
 
 

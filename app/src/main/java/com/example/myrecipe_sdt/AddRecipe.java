@@ -59,6 +59,7 @@ public class AddRecipe extends AppCompatActivity {
                     estimated_cost = cost.getText().toString().trim();
                     recipe_steps = recipesteps.getText().toString().trim();
 
+                    Toast.makeText(AddRecipe.this, "Recipe Added", Toast.LENGTH_SHORT).show();
                     sendUserData();
                 }
 
@@ -71,7 +72,7 @@ public class AddRecipe extends AppCompatActivity {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference reference = firebaseDatabase.getReference(firebaseAuth.getUid());
         DatabaseReference recipelistbranch = reference.child("My Recipe List");
-        RecipeGetterSetter recipeGetterSetter = new RecipeGetterSetter(recipe_name,cook_name,estimated_time,estimated_cost,recipe_steps);
+        RecipeGetterSetter recipeGetterSetter = new RecipeGetterSetter(cook_name,estimated_cost,estimated_time,recipe_steps,recipe_name);
         recipelistbranch.setValue(recipeGetterSetter);
     }
 }

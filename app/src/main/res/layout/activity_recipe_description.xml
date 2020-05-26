@@ -43,16 +43,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="430dp"
-                android:text="Recipe Name   :" />
+                android:layout_marginTop="430dp"/>
 
             <TextView
                 android:id="@+id/cookname_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="480dp"
-                android:text="Cook Name   :" />
+                android:layout_marginTop="480dp"/>
 
 
             <TextView
@@ -60,16 +58,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="530dp"
-                android:text="Estimated Time   :" />
+                android:layout_marginTop="530dp" />
 
             <TextView
                 android:id="@+id/recipecost_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="580dp"
-                android:text="Estimated Cost   :" />
+                android:layout_marginTop="580dp" />
 
             <TextView
                 android:id="@+id/fullrecipe_detail"
@@ -77,7 +73,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="630dp"
-                android:text="Recipe   :"
                 android:inputType="textMultiLine"/>
 
 

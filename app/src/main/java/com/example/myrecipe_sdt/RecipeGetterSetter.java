@@ -1,24 +1,17 @@
 package com.example.myrecipe_sdt;
 
 public class RecipeGetterSetter {
-    String rname,cname,etime,ecost,rdetail;
+    String cname,ecost,etime,rdetail,rname;
 
     public RecipeGetterSetter() {
+
     }
 
-    public RecipeGetterSetter(String rname, String cname, String etime, String ecost, String rdetail) {
-        this.rname = rname;
+    public RecipeGetterSetter(String cname, String ecost, String etime, String rdetail, String rname) {
         this.cname = cname;
-        this.etime = etime;
         this.ecost = ecost;
+        this.etime = etime;
         this.rdetail = rdetail;
-    }
-
-    public String getRname() {
-        return rname;
-    }
-
-    public void setRname(String rname) {
         this.rname = rname;
     }
 
@@ -30,14 +23,6 @@ public class RecipeGetterSetter {
         this.cname = cname;
     }
 
-    public String getEtime() {
-        return etime;
-    }
-
-    public void setEtime(String etime) {
-        this.etime = etime;
-    }
-
     public String getEcost() {
         return ecost;
     }
@@ -46,11 +31,27 @@ public class RecipeGetterSetter {
         this.ecost = ecost;
     }
 
+    public String getEtime() {
+        return etime;
+    }
+
+    public void setEtime(String etime) {
+        this.etime = etime;
+    }
+
     public String getRdetail() {
         return rdetail;
     }
 
     public void setRdetail(String rdetail) {
         this.rdetail = rdetail;
+    }
+
+    public String getRname() {
+        return rname;
+    }
+
+    public void setRname(String rname) {
+        this.rname = rname;
     }
 }
