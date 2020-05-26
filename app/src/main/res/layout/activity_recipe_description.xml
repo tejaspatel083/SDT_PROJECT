@@ -54,20 +54,13 @@
                 android:layout_marginTop="480dp"
                 android:text="Cook Name   :" />
 
-            <TextView
-                android:id="@+id/fullrecipe_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="530dp"
-                android:text="Recipe   :" />
 
             <TextView
                 android:id="@+id/recipetime_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="580dp"
+                android:layout_marginTop="530dp"
                 android:text="Estimated Time   :" />
 
             <TextView
@@ -75,24 +68,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="580dp"
+                android:text="Estimated Cost   :" />
+
+            <TextView
+                android:id="@+id/fullrecipe_detail"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="630dp"
-                android:text="Estimated Cost   :" />
-
-            <TextView
-                android:id="@+id/recipecost_detail1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="680dp"
-                android:text="Estimated Cost   :" />
-
-            <TextView
-                android:id="@+id/recipecost_detail2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="730dp"
-                android:text="Estimated Cost   :" />
+                android:text="Recipe   :"
+                android:inputType="textMultiLine"/>
 
 
         </RelativeLayout>
