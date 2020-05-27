@@ -54,4 +54,10 @@ public class RecipeGetterSetter {
     public void setRname(String rname) {
         this.rname = rname;
     }
+
+
+    public String toString()
+    {
+        return this.rname;
+    }
 }

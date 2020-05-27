@@ -12,9 +12,7 @@ class MyListAdapter extends BaseAdapter {
 
     ArrayList<MyNamelist> myNamelistArrayList;
 
-    public MyListAdapter(ArrayList<MyNamelist> myNamelistArrayList) {
-        this.myNamelistArrayList = myNamelistArrayList;
-    }
+   
 
     @Override
     public int getCount() {

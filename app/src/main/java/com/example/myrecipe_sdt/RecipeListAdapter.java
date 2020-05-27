@@ -10,12 +10,11 @@ import java.util.ArrayList;
 
 class RecipeListAdapter extends BaseAdapter {
 
+    ArrayList<RecipeGetterSetter> namelist;
 
-    public RecipeListAdapter(ArrayList<RecipeNameList> namelist) {
+    public RecipeListAdapter(ArrayList<RecipeGetterSetter> namelist) {
         this.namelist = namelist;
     }
-
-    ArrayList<RecipeNameList> namelist;
 
     @Override
     public int getCount() {
@@ -37,7 +36,7 @@ class RecipeListAdapter extends BaseAdapter {
 
         convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.homepage_model,parent,false);
         TextView name = convertView.findViewById(R.id.recipename_homepage);
-        name.setText(namelist.get(position).getName());
+        name.setText(namelist.get(position).getRname());
 
         return convertView;
     }

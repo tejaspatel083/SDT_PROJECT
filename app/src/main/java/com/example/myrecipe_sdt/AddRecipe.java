@@ -25,7 +25,6 @@ public class AddRecipe extends AppCompatActivity {
     private Button add_button;
     private FirebaseAuth firebaseAuth;
     String recipe_name,cook_name,estimated_time,estimated_cost,recipe_steps;
-    public int number=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,15 +62,15 @@ public class AddRecipe extends AppCompatActivity {
 
                     Toast.makeText(AddRecipe.this, "Recipe Added", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(AddRecipe.this,MyRecipeListPage.class));
-                    number++;
-                    sendUserData(number);
+
+                    sendUserData();
                 }
 
             }
         });
     }
 
-    private void sendUserData(int n)
+    private void sendUserData()
     {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference reference = firebaseDatabase.getReference(firebaseAuth.getUid());

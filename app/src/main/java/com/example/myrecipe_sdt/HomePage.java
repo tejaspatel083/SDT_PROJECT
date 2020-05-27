@@ -22,9 +22,7 @@ import androidx.navigation.ui.NavigationUI;
 import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
-    private ListView listView;
-    private ArrayList<RecipeNameList> arrayList;
-    private RecipeListAdapter adapter;
+
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -32,32 +30,7 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        listView = findViewById(R.id.homepage_list);
-
-        arrayList = new ArrayList<>();
-        adapter = new RecipeListAdapter(arrayList);
-
-        arrayList.add(new RecipeNameList("Paneer Butter Masala"));
-        arrayList.add(new RecipeNameList("Palak Paneer"));
-        arrayList.add(new RecipeNameList("Pav Bhaji"));
-        arrayList.add(new RecipeNameList("Pani Puri"));
-        arrayList.add(new RecipeNameList("Sandwich"));
-
         firebaseAuth = FirebaseAuth.getInstance();
-
-        listView.setAdapter(adapter);
-
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent intent = new Intent(HomePage.this,RecipeDescription.class);
-                startActivity(intent);
-            }
-        });
-
-
 
     }
 

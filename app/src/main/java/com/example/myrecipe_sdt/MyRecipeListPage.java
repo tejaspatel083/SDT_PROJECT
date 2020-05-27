@@ -1,28 +1,40 @@
 package com.example.myrecipe_sdt;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class MyRecipeListPage extends AppCompatActivity {
 
-    private ListView mylistview;
-    private ArrayList<MyNamelist> mynamelist;
-    private MyListAdapter myListAdapter;
+    ListView listView;
+    ArrayList<String> arList = new ArrayList<>();
+    ArrayAdapter<String> adapter;
+    RecipeGetterSetter rgs = new RecipeGetterSetter();
+
     private Button addbutton;
     private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,23 +42,26 @@ public class MyRecipeListPage extends AppCompatActivity {
         setContentView(R.layout.activity_my_recipe_list_page);
 
 
-        mylistview = findViewById(R.id.myrecipepage_list);
+        listView = findViewById(R.id.myrecipepage_list);
         addbutton = findViewById(R.id.addrecipebtn);
+
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
-        mynamelist = new ArrayList<>();
-        myListAdapter = new MyListAdapter(mynamelist);
+        adapter = new ArrayAdapter<String>(this,R.layout.myrecipelist_model,R.id.recipename_mylist,arList);
 
-        mylistview.setAdapter(myListAdapter);
+
+
+
+        /*
 
         mynamelist.add(new MyNamelist("Sev Tameta"));
         mynamelist.add(new MyNamelist("Chhole Bhature"));
         mynamelist.add(new MyNamelist("Dabeli"));
         mynamelist.add(new MyNamelist("Potato Wages"));
         mynamelist.add(new MyNamelist("Vadapav"));
-        mynamelist.add(new MyNamelist("Dal Dhokli"));
 
-
+        */
 
         addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +71,36 @@ public class MyRecipeListPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+
+        DatabaseReference recipelistbranch = databaseReference.child("My Recipe List");
+
+        recipelistbranch.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds: dataSnapshot.getChildren())
+                {
+
+                    rgs = ds.getValue(RecipeGetterSetter.class);
+                    arList.add(rgs.getRname());
+                }
+
+                listView.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
     }
 
 
