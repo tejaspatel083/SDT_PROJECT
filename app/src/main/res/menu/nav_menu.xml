@@ -11,7 +11,7 @@
     <item
         android:id="@+id/navigation_MyProfile"
         android:title="@string/title_dashboard"
-        android:icon="@drawable/ic_person_black_24dp"/>
+        />
 
     <item
         android:id="@+id/navigation_List"
@@ -23,9 +23,5 @@
         android:title="Logout"
         />
 
-    <item
-        android:id="@+id/detail"
-        android:title="Detail"
-        />
 
 </menu>

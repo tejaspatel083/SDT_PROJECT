@@ -52,7 +52,7 @@ public class RecipeDescription extends AppCompatActivity {
                 cookname_txt.setText(" Cook Name :   "+recipeGetterSetter.getCname());
                 time_txt.setText(" Estimated Time :   "+recipeGetterSetter.getEtime());
                 cost_txt.setText(" Estimated Cost :   "+recipeGetterSetter.getEcost());
-                fullrecipe_txt.setText(" Recipe :   "+recipeGetterSetter.getRdetail());
+                fullrecipe_txt.setText(""+recipeGetterSetter.getRdetail()+"\n\n");
             }
 
             @Override

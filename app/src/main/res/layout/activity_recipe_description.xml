@@ -14,7 +14,7 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="1300dp">
+            android:layout_height="wrap_content">
 
 
             <androidx.cardview.widget.CardView
@@ -69,7 +69,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="630dp"
                 android:text=" Recipe :     "
