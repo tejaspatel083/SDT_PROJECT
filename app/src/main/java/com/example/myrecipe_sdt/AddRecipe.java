@@ -3,6 +3,7 @@ package com.example.myrecipe_sdt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -60,6 +61,7 @@ public class AddRecipe extends AppCompatActivity {
                     recipe_steps = recipesteps.getText().toString().trim();
 
                     Toast.makeText(AddRecipe.this, "Recipe Added", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(AddRecipe.this,MyRecipeListPage.class));
                     sendUserData();
                 }
 
