@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,11 +28,14 @@ public class MainActivity extends AppCompatActivity {
     private TextView forgotpwd;
     private EditText useremail,userpassword;
     private FirebaseAuth firebaseAuth;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        progressDialog = new ProgressDialog(MainActivity.this);
 
         loginbtn = (Button)findViewById(R.id.MainLoginBtn);
         createbtn = (Button)findViewById(R.id.MainCreateBtn);
@@ -78,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    progressDialog.setMessage("Logging in...");
+                    progressDialog.show();
                     useremail.setError(null);
                     userpassword.setError(null);
                     validate(useremail.getText().toString(),userpassword.getText().toString());
@@ -120,12 +126,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
+
+
                 if (task.isSuccessful())
                 {
+                    progressDialog.dismiss();
                     checkEmailVerification();
                 }
                 else
                 {
+                    progressDialog.dismiss();
                     //Toast.makeText(MainActivity.this,"Enter Valid Username and Password",Toast.LENGTH_LONG).show();
                     Toast toast = Toast.makeText(MainActivity.this,"Enter Valid Email and Password",Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -140,11 +150,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkEmailVerification()
     {
+        progressDialog.setMessage("Logging in...");
+        progressDialog.show();
+
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Boolean emailflag = firebaseUser.isEmailVerified();
 
         if (emailflag)
         {
+            progressDialog.dismiss();
             //Toast.makeText(MainActivity.this,"Login Successful",Toast.LENGTH_LONG).show();
             Toast toast = Toast.makeText(MainActivity.this,"Login Successful",Toast.LENGTH_LONG);
             toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -153,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
+            progressDialog.dismiss();
             //Toast.makeText(MainActivity.this,"Need to Verify Email",Toast.LENGTH_LONG).show();
             Toast toast = Toast.makeText(MainActivity.this,"Need to Verify Email",Toast.LENGTH_LONG);
             toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);

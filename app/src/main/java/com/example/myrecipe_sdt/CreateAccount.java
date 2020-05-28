@@ -3,6 +3,7 @@ package com.example.myrecipe_sdt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -26,11 +27,17 @@ public class CreateAccount extends AppCompatActivity {
     private Button createbtn;
     private FirebaseAuth firebaseAuth;
     String name,email,phone,age,password,repassword;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+
+        progressDialog =new ProgressDialog(CreateAccount.this);
+        progressDialog.setMessage("Creating...");
+
+
 
         user_name = findViewById(R.id.CreateName);
         user_email = findViewById(R.id.CreateEmail);
@@ -58,6 +65,7 @@ public class CreateAccount extends AppCompatActivity {
                 }
                 else if (user_pwd1.getText().toString().trim().equals(user_pwd2.getText().toString().trim()))
                 {
+                    progressDialog.show();
                     name = user_name.getText().toString().trim();
                     email = user_email.getText().toString().trim();
                     age = user_age.getText().toString().trim();
@@ -71,10 +79,12 @@ public class CreateAccount extends AppCompatActivity {
 
                             if (task.isSuccessful())
                             {
+                                progressDialog.dismiss();
                                 sendEmailVerification();
 
                             }else
                             {
+                                progressDialog.dismiss();
                                 if (task.getException() instanceof FirebaseAuthUserCollisionException) {
 
                                     Toast toast = Toast.makeText(CreateAccount.this,"User with this email already exist.",Toast.LENGTH_LONG);
@@ -105,7 +115,6 @@ public class CreateAccount extends AppCompatActivity {
     private  void sendEmailVerification()
     {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-
         if (firebaseUser != null)
         {
             firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
