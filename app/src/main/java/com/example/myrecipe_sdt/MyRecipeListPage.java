@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -90,11 +91,27 @@ public class MyRecipeListPage extends AppCompatActivity {
                 }
 
                 listView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                Intent intent = new Intent(MyRecipeListPage.this,RecipeDescription.class);
+                startActivity(intent);
+
 
             }
         });
@@ -152,6 +169,8 @@ public class MyRecipeListPage extends AppCompatActivity {
 
         return true;
     }
+
+
 
 
 }

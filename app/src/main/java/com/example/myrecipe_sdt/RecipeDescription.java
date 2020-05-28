@@ -1,6 +1,7 @@
 package com.example.myrecipe_sdt;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -9,11 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 public class RecipeDescription extends AppCompatActivity {
 
@@ -36,11 +40,54 @@ public class RecipeDescription extends AppCompatActivity {
         fullrecipe_txt = findViewById(R.id.fullrecipe_detail);
 
 
+        DatabaseReference databaseReference = (DatabaseReference) firebaseDatabase.getReference(firebaseAuth.getUid()).child("My Recipe List");
+
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                Map<String,Object> newPost=(Map<String,Object>)dataSnapshot.getValue();
+
+                String name1 = String.valueOf(newPost.get("cname"));
+                String name2 = String.valueOf(newPost.get("ecost"));
+                String name3 = String.valueOf(newPost.get("etime"));
+                String name4 = String.valueOf(newPost.get("rdetail"));
+                String name5 = String.valueOf(newPost.get("rname"));
 
 
-        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+                recipename_txt.setText(" Recipe Name : "+name5);
+                cookname_txt.setText(" Cook Name :   "+name1);
+                time_txt.setText(" Estimated Time :   "+name3);
+                cost_txt.setText(" Estimated Cost :   "+name2);
+                fullrecipe_txt.setText(""+name4+"\n\n");
 
-        DatabaseReference recipelistbranch = databaseReference.child("My Recipe List");
+
+
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        /*
 
         recipelistbranch.addValueEventListener(new ValueEventListener() {
             @Override
@@ -64,7 +111,7 @@ public class RecipeDescription extends AppCompatActivity {
                 toast.show();
             }
         });
-
+*/
 
 
     }
