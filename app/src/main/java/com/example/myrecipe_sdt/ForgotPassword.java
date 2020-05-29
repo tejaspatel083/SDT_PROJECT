@@ -3,8 +3,10 @@ package com.example.myrecipe_sdt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +38,8 @@ public class ForgotPassword extends AppCompatActivity {
             public void onClick(View v) {
 
                 String email = forgotpwd.getText().toString().trim();
+                Vibrator vb = (Vibrator)   getSystemService(Context.VIBRATOR_SERVICE);
+                vb.vibrate(20);
 
 
                 if(email.length() == 0)

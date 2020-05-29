@@ -17,6 +17,12 @@
         app:srcCompat="@drawable/ic_person_black_24dp"
         android:background="@drawable/white_background"
         tools:ignore="VectorDrawableCompat"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="158dp"/>
     <EditText
         android:id="@+id/CreateName"
         android:layout_width="300dp"

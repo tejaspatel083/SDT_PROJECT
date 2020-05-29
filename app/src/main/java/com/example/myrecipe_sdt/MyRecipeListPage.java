@@ -52,18 +52,6 @@ public class MyRecipeListPage extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this,R.layout.myrecipelist_model,R.id.recipename_mylist,arList);
 
 
-
-
-        /*
-
-        mynamelist.add(new MyNamelist("Sev Tameta"));
-        mynamelist.add(new MyNamelist("Chhole Bhature"));
-        mynamelist.add(new MyNamelist("Dabeli"));
-        mynamelist.add(new MyNamelist("Potato Wages"));
-        mynamelist.add(new MyNamelist("Vadapav"));
-
-        */
-
         addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
