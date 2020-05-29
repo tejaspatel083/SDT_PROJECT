@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +13,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.provider.MediaStore;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,6 +43,7 @@ import java.io.IOException;
 public class CreateAccount extends AppCompatActivity {
 
     private EditText user_name,user_email,user_age,user_phone,user_pwd1,user_pwd2;
+    private TextView v1,v2,iv1,iv2,selectimg_txt;
     private ImageView imageView;
     private Button createbtn;
     private FirebaseAuth firebaseAuth;
@@ -68,6 +74,7 @@ public class CreateAccount extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +93,11 @@ public class CreateAccount extends AppCompatActivity {
         user_pwd1 = findViewById(R.id.CreatePassword);
         user_pwd2 = findViewById(R.id.CreateRePassword);
         createbtn = findViewById(R.id.CreateBtn);
+        v1 = (TextView)findViewById(R.id.visible1);
+        iv1 =(TextView)findViewById(R.id.notvisible1);
+        v2 = (TextView)findViewById(R.id.visible2);
+        iv2 = (TextView)findViewById(R.id.notvisible2);
+        selectimg_txt = findViewById(R.id.selectimage);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
@@ -172,6 +184,56 @@ public class CreateAccount extends AppCompatActivity {
                 }
             }
         });
+
+
+        user_pwd1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v1.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+        user_pwd2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v2.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+        v1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user_pwd1.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                v1.setVisibility(View.INVISIBLE);
+                iv1.setVisibility(View.VISIBLE);
+            }
+        });
+        iv1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user_pwd1.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                iv1.setVisibility(View.INVISIBLE);
+                v1.setVisibility(View.VISIBLE);
+            }
+        });
+        v2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user_pwd2.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                v2.setVisibility(View.INVISIBLE);
+                iv2.setVisibility(View.VISIBLE);
+            }
+        });
+        iv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user_pwd2.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                iv2.setVisibility(View.INVISIBLE);
+                v2.setVisibility(View.VISIBLE);
+            }
+        });
+
+
     }
 
 

@@ -18,11 +18,12 @@
         android:background="@drawable/white_background"
         tools:ignore="VectorDrawableCompat"/>
     <TextView
+        android:id="@+id/selectimage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select Image"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="158dp"/>
+        android:layout_marginTop="185dp"/>
     <EditText
         android:id="@+id/CreateName"
         android:layout_width="300dp"
@@ -90,6 +91,38 @@
         android:drawableLeft="@drawable/ic_lock_black_24dp"
         android:paddingLeft="10dp"
         android:inputType="textPassword"/>
+    <TextView
+        android:id="@+id/visible1"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:drawableLeft="@drawable/ic_visibility_black_24dp"
+        android:layout_marginLeft="315dp"
+        android:visibility="invisible"
+        android:layout_marginTop="478dp"/>
+    <TextView
+        android:id="@+id/notvisible1"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:drawableLeft="@drawable/ic_visibility_off_black_24dp"
+        android:layout_marginLeft="315dp"
+        android:visibility="invisible"
+        android:layout_marginTop="478dp"/>
+    <TextView
+        android:id="@+id/visible2"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:drawableLeft="@drawable/ic_visibility_black_24dp"
+        android:layout_marginLeft="315dp"
+        android:visibility="invisible"
+        android:layout_marginTop="538dp"/>
+    <TextView
+        android:id="@+id/notvisible2"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:drawableLeft="@drawable/ic_visibility_off_black_24dp"
+        android:layout_marginLeft="315dp"
+        android:visibility="invisible"
+        android:layout_marginTop="538dp"/>
     <Button
         android:id="@+id/CreateBtn"
         android:layout_width="150dp"
