@@ -99,8 +99,9 @@ public class MyRecipeListPage extends AppCompatActivity {
             }
         });
 
+        /*
         StorageReference storageReference = firebaseStorage.getReference();
-        storageReference.child(firebaseAuth.getUid()).child("Images/Profile Pic").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageReference.child(firebaseAuth.getUid()).child("Images/Recipe Pic").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
 
@@ -110,7 +111,7 @@ public class MyRecipeListPage extends AppCompatActivity {
         });
 
 
-
+*/
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -2,6 +2,7 @@ package com.example.myrecipe_sdt;
 
 public class RecipeGetterSetter {
     String cname,ecost,etime,rdetail,rname;
+    
 
     public RecipeGetterSetter() {
 

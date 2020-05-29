@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -36,7 +37,9 @@ class RecipeListAdapter extends BaseAdapter {
 
         convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.homepage_model,parent,false);
         TextView name = convertView.findViewById(R.id.recipename_homepage);
+        ImageView image = convertView.findViewById(R.id.imgviewmylist);
         name.setText(namelist.get(position).getRname());
+        //image.setImageResource(namelist.get(position));
 
         return convertView;
     }
