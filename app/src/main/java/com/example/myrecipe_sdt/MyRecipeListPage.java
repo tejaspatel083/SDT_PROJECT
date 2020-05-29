@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -13,9 +14,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -23,11 +26,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class MyRecipeListPage extends AppCompatActivity {
 
+    private ImageView recipeimage;
     ListView listView;
     ArrayList<String> arList = new ArrayList<>();
     ArrayAdapter<String> adapter;
@@ -36,6 +43,7 @@ public class MyRecipeListPage extends AppCompatActivity {
     private Button addbutton;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
+    private FirebaseStorage firebaseStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +53,11 @@ public class MyRecipeListPage extends AppCompatActivity {
 
         listView = findViewById(R.id.myrecipepage_list);
         addbutton = findViewById(R.id.addrecipebtn);
+        recipeimage = findViewById(R.id.imgviewmylist);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
 
         adapter = new ArrayAdapter<String>(this,R.layout.myrecipelist_model,R.id.recipename_mylist,arList);
 
@@ -85,6 +95,16 @@ public class MyRecipeListPage extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        StorageReference storageReference = firebaseStorage.getReference();
+        storageReference.child(firebaseAuth.getUid()).child("Images/Profile Pic").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+
+                Picasso.get().load(uri).into(recipeimage);
 
             }
         });
