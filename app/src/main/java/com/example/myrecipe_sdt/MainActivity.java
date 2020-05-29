@@ -9,7 +9,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,10 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
     private Button loginbtn,createbtn;
     private TextView forgotpwd;
+    private TextView textView2,textView3;
     private EditText useremail,userpassword;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         forgotpwd = (TextView)findViewById(R.id.MainForgotPassword);
         useremail = findViewById(R.id.MainEmail);
         userpassword = findViewById(R.id.MainPassword);
+        textView2 = (TextView)findViewById(R.id.visible);
+        textView3 = (TextView)findViewById(R.id.notvisible);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -52,6 +59,36 @@ public class MainActivity extends AppCompatActivity {
            finish();
            startActivity(new Intent(MainActivity.this,HomePage.class));
        }
+
+
+
+        userpassword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                textView2.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+        textView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userpassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                textView2.setVisibility(View.INVISIBLE);
+                textView3.setVisibility(View.VISIBLE);
+            }
+        });
+        textView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                textView3.setVisibility(View.INVISIBLE);
+                textView2.setVisibility(View.VISIBLE);
+            }
+        });
+
+
+
+
 
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
