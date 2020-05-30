@@ -56,9 +56,11 @@ public class HomePage extends AppCompatActivity {
         array_Adapter = new ArrayAdapter<>(this,R.layout.homepage_model,R.id.recipename_homepage,array_List);
 
 
-        DatabaseReference databaseReference = firebaseDatabase.getReference("my-recipe-63268");
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        DatabaseReference childreference = databaseReference.child("User Recipes");
+
+        childreference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

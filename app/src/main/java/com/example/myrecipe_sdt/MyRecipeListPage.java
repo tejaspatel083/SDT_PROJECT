@@ -73,9 +73,9 @@ public class MyRecipeListPage extends AppCompatActivity {
 
 
 
-        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
 
-        DatabaseReference recipelistbranch = databaseReference.child("My Recipe List");
+        DatabaseReference recipelistbranch = databaseReference.child("User Recipes").child(firebaseAuth.getUid());
 
         recipelistbranch.addValueEventListener(new ValueEventListener() {
             @Override

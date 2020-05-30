@@ -275,7 +275,8 @@ public class CreateAccount extends AppCompatActivity {
     private void sendUserData()
     {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference reference = firebaseDatabase.getReference(firebaseAuth.getUid());
+        DatabaseReference reference = firebaseDatabase.getReference().child("Users").child(firebaseAuth.getUid());
+
         StorageReference imageReference = storageReference.child(firebaseAuth.getUid()).child("Images").child("Profile Pic");
         UploadTask uploadTask = imageReference.putFile(imagePath);
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -292,9 +293,7 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                Toast toast = Toast.makeText(CreateAccount.this,"Upload Successful",Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
-                toast.show();
+
 
             }
         });

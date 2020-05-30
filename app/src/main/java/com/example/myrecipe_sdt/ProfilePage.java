@@ -53,7 +53,8 @@ public class ProfilePage extends AppCompatActivity {
         email = findViewById(R.id.ProfileEmail);
 
 
-        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
+        DatabaseReference childreference = databaseReference.child("Users").child(firebaseAuth.getUid());
 
         StorageReference storageReference = firebaseStorage.getReference();
         storageReference.child(firebaseAuth.getUid()).child("Images/Profile Pic").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -67,16 +68,27 @@ public class ProfilePage extends AppCompatActivity {
 
 
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        childreference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
 
-                name.setText(" Name : "+userProfile.getUsername());
-                phone.setText(" Phone :   "+userProfile.getUserphone());
-                age.setText(" Age :   "+userProfile.getUserage());
-                email.setText(" Email :   "+userProfile.getUseremail());
+                if (userProfile != null) {
+                    name.setText(" Name : "+userProfile.getUsername());
+                    phone.setText(" Phone :   "+userProfile.getUserphone());
+                    age.setText(" Age :   "+userProfile.getUserage());
+                    email.setText(" Email :   "+userProfile.getUseremail());
+                }
+                else
+                {
+                    name.setText("");
+                    phone.setText("");
+                    age.setText("");
+                    email.setText("");
+                }
+
 
             }
 

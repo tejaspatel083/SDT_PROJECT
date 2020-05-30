@@ -40,9 +40,11 @@ public class RecipeDescription extends AppCompatActivity {
         fullrecipe_txt = findViewById(R.id.fullrecipe_detail);
 
 
-        DatabaseReference databaseReference = (DatabaseReference) firebaseDatabase.getReference(firebaseAuth.getUid()).child("My Recipe List");
+        DatabaseReference databaseReference = (DatabaseReference) firebaseDatabase.getReference();
 
-        databaseReference.addChildEventListener(new ChildEventListener() {
+        DatabaseReference childreference = databaseReference.child("User Recipes").child(firebaseAuth.getUid());
+
+        childreference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
