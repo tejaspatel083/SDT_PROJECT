@@ -42,7 +42,6 @@ public class RecipeDescription extends AppCompatActivity {
 
 
         str = getIntent().getExtras().get("recipekey").toString();
-        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
 
 
         DatabaseReference databaseReference = (DatabaseReference) firebaseDatabase.getReference();
@@ -104,33 +103,6 @@ public class RecipeDescription extends AppCompatActivity {
 
             }
         });
-
-        /*
-
-        recipelistbranch.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                RecipeGetterSetter recipeGetterSetter = dataSnapshot.getValue(RecipeGetterSetter.class);
-
-                recipename_txt.setText(" Recipe Name : "+recipeGetterSetter.getRname());
-                cookname_txt.setText(" Cook Name :   "+recipeGetterSetter.getCname());
-                time_txt.setText(" Estimated Time :   "+recipeGetterSetter.getEtime());
-                cost_txt.setText(" Estimated Cost :   "+recipeGetterSetter.getEcost());
-                fullrecipe_txt.setText(""+recipeGetterSetter.getRdetail()+"\n\n");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                //Toast.makeText(Main2Activity.this,databaseError.getCode(),Toast.LENGTH_LONG).show();
-                Toast toast = Toast.makeText(RecipeDescription.this,databaseError.getCode(),Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
-                toast.show();
-            }
-        });
-*/
-
 
     }
 }

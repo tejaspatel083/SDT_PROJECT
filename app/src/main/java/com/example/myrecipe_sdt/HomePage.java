@@ -99,10 +99,6 @@ public class HomePage extends AppCompatActivity {
                 intent.putExtra("recipekey",recipetext);
                 startActivity(intent);
 
-                Toast.makeText(HomePage.this, recipetext, Toast.LENGTH_SHORT).show();
-
-
-
             }
         });
 
