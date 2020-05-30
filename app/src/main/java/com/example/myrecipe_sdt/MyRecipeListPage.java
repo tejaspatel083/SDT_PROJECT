@@ -75,7 +75,7 @@ public class MyRecipeListPage extends AppCompatActivity {
 
         DatabaseReference databaseReference = firebaseDatabase.getReference();
 
-        DatabaseReference recipelistbranch = databaseReference.child("User Recipes").child(firebaseAuth.getUid());
+        final DatabaseReference recipelistbranch = databaseReference.child("User Recipes").child(firebaseAuth.getUid());
 
         recipelistbranch.addValueEventListener(new ValueEventListener() {
             @Override
@@ -117,9 +117,14 @@ public class MyRecipeListPage extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                String recipetext = parent.getItemAtPosition(position).toString();
 
                 Intent intent = new Intent(MyRecipeListPage.this,RecipeDescription.class);
+                intent.putExtra("recipekey",recipetext);
                 startActivity(intent);
+
+                Toast.makeText(MyRecipeListPage.this, recipetext, Toast.LENGTH_SHORT).show();
+
 
 
             }
