@@ -89,6 +89,25 @@ public class HomePage extends AppCompatActivity {
         });
 
 
+        list_View.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String recipetext = parent.getItemAtPosition(position).toString();
+
+                Intent intent = new Intent(HomePage.this,RecipeDescription.class);
+                intent.putExtra("recipekey",recipetext);
+                startActivity(intent);
+
+                Toast.makeText(HomePage.this, recipetext, Toast.LENGTH_SHORT).show();
+
+
+
+            }
+        });
+
+
+
     }
 
 

@@ -47,32 +47,38 @@ public class RecipeDescription extends AppCompatActivity {
 
         DatabaseReference databaseReference = (DatabaseReference) firebaseDatabase.getReference();
 
-        DatabaseReference childreference = databaseReference.child("User Recipes").child(firebaseAuth.getUid());
+        DatabaseReference childreference = databaseReference.child("User Recipes");
 
         childreference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                DataSnapshot name = dataSnapshot.child("rname");
-                String area_value = name.getValue().toString();
-                if(area_value.contains(str)){
+                for (DataSnapshot ds: dataSnapshot.getChildren())
+                {
+
+                    DataSnapshot name = ds.child("rname");
+                    String area_value = name.getValue().toString();
+                    if(area_value.contains(str)){
 
 
 
-                    Map<String,Object> newPost=(Map<String,Object>)dataSnapshot.getValue();
+                        Map<String,Object> newPost=(Map<String,Object>)ds.getValue();
 
-                    String name1 = String.valueOf(newPost.get("cname"));
-                    String name2 = String.valueOf(newPost.get("ecost"));
-                    String name3 = String.valueOf(newPost.get("etime"));
-                    String name4 = String.valueOf(newPost.get("rdetail"));
-                    String name5 = String.valueOf(newPost.get("rname"));
+                        String name1 = String.valueOf(newPost.get("cname"));
+                        String name2 = String.valueOf(newPost.get("ecost"));
+                        String name3 = String.valueOf(newPost.get("etime"));
+                        String name4 = String.valueOf(newPost.get("rdetail"));
+                        String name5 = String.valueOf(newPost.get("rname"));
 
 
-                    recipename_txt.setText(" Recipe Name : "+name5);
-                    cookname_txt.setText(" Cook Name :   "+name1);
-                    time_txt.setText(" Estimated Time :   "+name3);
-                    cost_txt.setText(" Estimated Cost :   "+name2);
-                    fullrecipe_txt.setText(""+name4+"\n\n");
+                        recipename_txt.setText(" Recipe Name : "+name5);
+                        cookname_txt.setText(" Cook Name :   "+name1);
+                        time_txt.setText(" Estimated Time :   "+name3);
+                        cost_txt.setText(" Estimated Cost :   "+name2);
+                        fullrecipe_txt.setText(""+name4+"\n\n");
+
+
+                    }
 
                 }
 
