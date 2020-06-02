@@ -136,7 +136,7 @@ public class AddRecipe extends AppCompatActivity {
         DatabaseReference reference = firebaseDatabase.getReference().child("User Recipes");
         DatabaseReference recipelistbranch = reference.child(firebaseAuth.getUid()).push();
 
-        StorageReference imageReference = storageReference.child(firebaseAuth.getUid()).child("Images").child("Recipe Pic");
+        StorageReference imageReference = storageReference.child("User Recipe Images").child(firebaseAuth.getUid()).child("Images");
         UploadTask uploadTask = imageReference.putFile(recipeimagePath);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
