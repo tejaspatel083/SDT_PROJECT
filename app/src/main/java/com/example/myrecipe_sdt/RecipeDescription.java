@@ -56,6 +56,7 @@ public class RecipeDescription extends AppCompatActivity {
                 {
 
                     DataSnapshot name = ds.child("rname");
+
                     String area_value = name.getValue().toString();
                     if(area_value.contains(str)){
 
